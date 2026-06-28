@@ -7,6 +7,8 @@
 
 int mapSizeX=16,mapSizeY=11,mapS=64,offset=0,worldX=7,worldY=7,screenWidth=1024,screenHeight=704;
 int Dir[4][2] = {{-1,0},{0,1},{1,0},{0,-1}};
+entity * player;
+entity * enemies[11][16];
 
 void frameTimer(int id){
     for(int y=0;y<mapSizeY;y++){for(int x=0;x<mapSizeX;x++){animation(enemies[y][x]);}}

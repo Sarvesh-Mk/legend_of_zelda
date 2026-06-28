@@ -10,14 +10,14 @@ extern long double playerTextureCoords[8][2];
 extern long double redMoblinTextureCoords[8][2];
 extern long double redOctorockTextureCoords[8][2];
 extern long double swordTextureCoords[4][2];
-long double arrowTextureCoords[4][2];
+extern long double arrowTextureCoords[4][2];
 extern long double spriteAtlas[192][1536][3];
 extern int worldMapBlocking[88][256];
 extern int worldMapTiles[88][256];
 extern int worldMapSpritesTextureCoords[144][2];
 extern long double worldMapTilesSprites[544][1224][3];
-int spriteWorldMap[11][16];
-int Dir[4][2];
+extern int spriteWorldMap[11][16];
+extern int Dir[4][2];
 
 extern int map[11][16];
 
@@ -56,8 +56,8 @@ typedef struct Entity{
     Weapon * weapon;
 } entity;
 
-entity * player;
-entity * enemies[11][16];
+extern entity * player;
+extern entity * enemies[11][16];
 
 //entity 
 void drawWeapon(Weapon * w);
