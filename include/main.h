@@ -59,6 +59,27 @@ typedef struct Entity{
 extern entity * player;
 extern entity * enemies[11][16];
 
+// Framebuffer: write pixels here, flushed to screen each frame as a single texture upload
+#define FB_W 1024
+#define FB_H 704
+extern unsigned char framebuffer[FB_H][FB_W][3];
+
+static inline unsigned char fb_clamp(float v){
+    if(v >= 1.0f) return 255;
+    if(v <= 0.0f) return 0;
+    return (unsigned char)(v * 255.0f);
+}
+
+static inline void fb_pixel(int x, int y, float r, float g, float b){
+    if((unsigned)x >= FB_W || (unsigned)y >= FB_H) return;
+    framebuffer[y][x][0] = fb_clamp(r);
+    framebuffer[y][x][1] = fb_clamp(g);
+    framebuffer[y][x][2] = fb_clamp(b);
+}
+
+void fb_clear(void);
+void fb_flush(void);
+
 //entity
 void drawWeapon(Weapon * w);
 void drawEntity(entity * entity);
