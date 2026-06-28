@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <GL/glut.h>
 #include <main.h>
 #include <string.h>
@@ -70,9 +71,12 @@ void drawMap(){
 
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glPointSize(1);
+    glBegin(GL_POINTS);
     drawWorld();
     update_enemies();
     updatePlayer(player);
+    glEnd();
     glutSwapBuffers();
 }
 
@@ -89,6 +93,7 @@ void init(){
 }
 
 int main(int argc, char * argv[]){
+    srand(time(NULL));
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(screenWidth, screenHeight);

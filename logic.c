@@ -68,7 +68,6 @@ Weapon * updateWeapon(Weapon * weapon, entity * e){
 }
 
 entity * walkCycle(entity * e){
-    srand(rand());
     int r = rand()%8;
     if(r>=4){
         e->dx=0;e->dy=0;e->standing=true;
@@ -100,7 +99,6 @@ void update_enemies(){
                 int c = staticCollision(map,enemies[y][x]->x+enemies[y][x]->dx,enemies[y][x]->y+enemies[y][x]->dy,enemies[y][x]->width,enemies[y][x]->length);
                 if(c == 0){
                     enemies[y][x]->x+=enemies[y][x]->dx;enemies[y][x]->y+=enemies[y][x]->dy;
-                    glutPostRedisplay();
                 }
                 else{enemies[y][x]->standing=true;}
             }

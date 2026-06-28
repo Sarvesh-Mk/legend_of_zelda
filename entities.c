@@ -6,10 +6,8 @@
 #include <stdbool.h>
 
 void drawWeapon(Weapon * w){
-    glPointSize(1);
-    glBegin(GL_POINTS);
-    double modColor;
-    if(w->changeColor==true){modColor = rand()%75; modColor = modColor/255;}
+    float modColor;
+    if(w->changeColor==true){modColor = (rand()%75)/255.0f;}
     else{modColor=0;}
     for (int y=0;y<w->length;y++){
         for (int x=0;x<w->width;x++){
@@ -21,12 +19,10 @@ void drawWeapon(Weapon * w){
             }
         }
     }
-    glEnd();
-    glutPostRedisplay();
 }
 
 
-entity * initEntity(int width, int height, int x, int y, int speed, int state, int health, int animMax, long double textureCoords[8][2], int ifWeapon){
+entity * initEntity(int width, int height, int x, int y, int speed, int state, int health, int animMax, float textureCoords[8][2], int ifWeapon){
     entity *e;
     e = (entity *)malloc(sizeof(entity));
     e->x = x; e->y = y;e->animMax=animMax;
@@ -38,7 +34,7 @@ entity * initEntity(int width, int height, int x, int y, int speed, int state, i
     return e;
 }
 
-entity * changeEntity(entity * e, int x, int y, int ox, int oy, int health, long double textureCoords[8][2], bool alive){
+entity * changeEntity(entity * e, int x, int y, int ox, int oy, int health, float textureCoords[8][2], bool alive){
     e->x = x; e->y = y; e->health=health; e->alive=alive; e->ox=ox; e->oy=oy;
     memcpy(e->textureCoords, textureCoords, sizeof(e->textureCoords));
 }
@@ -71,7 +67,7 @@ entity * EntityCollision(entity * e, entity * target){
 }
 
 
-Weapon * initWeapon(entity * ep,int width,int length, int speed, int damage, bool changeColor, long double textureCoords[4][2]){
+Weapon * initWeapon(entity * ep,int width,int length, int speed, int damage, bool changeColor, float textureCoords[4][2]){
     Weapon *e;
     e = (Weapon *)malloc(sizeof(Weapon));
     e->x=ep->x; e->y=ep->y;e->dx=0;e->dy=0;
@@ -83,8 +79,6 @@ Weapon * initWeapon(entity * ep,int width,int length, int speed, int damage, boo
 }
 
 void drawWall(int wallSprite, int x,int y,int xo,int yo, int mapS, int offset){
-    glPointSize(1);
-    glBegin(GL_POINTS);
     xo=x*mapS; yo=y*mapS;
     for (y=0;y<mapS;y++){
         for (x=0;x<mapS;x++){
@@ -92,14 +86,11 @@ void drawWall(int wallSprite, int x,int y,int xo,int yo, int mapS, int offset){
             glVertex2i(xo+offset+x,yo+offset+y);
         }
     }
-    glEnd();
 }
 
 void drawEntity(entity * e){
-    glPointSize(1);
-    glBegin(GL_POINTS);
-    double modColor;
-    if(e->hurt==true){modColor = rand()%75; modColor = modColor/255;}
+    float modColor;
+    if(e->hurt==true){modColor = (rand()%75)/255.0f;}
     else{modColor=0;}
     for (int y=0;y<e->length;y++){
         for (int x=0;x<e->width;x++){
@@ -111,12 +102,9 @@ void drawEntity(entity * e){
             }
         }
     }
-    glEnd();
 }
 
 void drawWorldSprite(int wx, int wy, int textureCoords[2]){
-    glPointSize(1);
-    glBegin(GL_POINTS);
     for (int y=0;y<mapS;y++){
         for (int x=0;x<mapS;x++){
             int a = y+textureCoords[1];
@@ -125,7 +113,6 @@ void drawWorldSprite(int wx, int wy, int textureCoords[2]){
             glVertex2i(wx+x,wy+y);
         }
     }
-    glEnd();
 }
 
 void drawWorld(){
